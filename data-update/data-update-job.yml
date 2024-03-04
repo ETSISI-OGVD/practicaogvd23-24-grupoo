@@ -7,7 +7,7 @@ command: >-
 inputs:
   input_data:
     mode: ro_mount
-    path: azureml:abfss://fstrabajo@datalaketrabajo.dfs.core.windows.net/realtor-data.csv
+    path: abfss://fstrabajo@datalaketrabajo.dfs.core.windows.net/realtor-data.csv
     type: uri_file
 outputs:
   output_data:
