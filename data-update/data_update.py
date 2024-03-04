@@ -2,7 +2,6 @@ import argparse
 import pandas as pd
 import numpy as np
 import mlflow
-import mltable
 
 
 def main():
@@ -23,10 +22,6 @@ def main():
 
     print(" ".join(f"{k}={v}" for k, v in vars(args).items()))
     print("input data:", args.data)
-
-    tbl = mltable.load(args.input_data, format="csv")
-    df = tbl.to_pandas_dataframe()
-    df.to_csv(args.output_data, index=False)
 
     df = pd.read_csv(
         args.input_data,
