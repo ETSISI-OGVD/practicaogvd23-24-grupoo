@@ -32,13 +32,13 @@ def main():
 
     print("input data:", args.data)
     
-    credit_df = pd.read_csv(args.data, header=1, index_col=0)
+    df = pd.read_csv(args.data, header=1, index_col=0)
 
-    mlflow.log_metric("num_samples", credit_df.shape[0])
-    mlflow.log_metric("num_features", credit_df.shape[1] - 1)
+    mlflow.log_metric("num_samples", df.shape[0])
+    mlflow.log_metric("num_features", df.shape[1] - 1)
 
     train_df, test_df = train_test_split(
-        credit_df,
+        df,
         test_size=args.test_train_ratio,
     )
     ####################
