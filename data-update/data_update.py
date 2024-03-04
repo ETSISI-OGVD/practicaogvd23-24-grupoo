@@ -21,7 +21,7 @@ def main():
     mlflow.sklearn.autolog()
 
     print(" ".join(f"{k}={v}" for k, v in vars(args).items()))
-    print("input data:", args.data)
+    print("input data:", args.input_data)
 
     df = pd.read_csv(
         args.input_data,
