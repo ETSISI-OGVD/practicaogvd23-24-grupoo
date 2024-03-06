@@ -4,6 +4,13 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * MON"
+  pull_request:
+    branches:
+      - main
+    types:
+      - "closed"
+    paths:
+      - 'data-update'
 
 jobs:
   data_update:
@@ -19,4 +26,5 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Submit job
       run: az ml job create -f data-update/data-update-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final
+    # TODO also run train -s --stream
 
