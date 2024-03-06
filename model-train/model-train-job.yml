@@ -2,12 +2,12 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 code: .
 command: >-
   python train.py
-  --training_data ${{inputs.training_data}}
+  --data ${{inputs.training_data}}
   --learning_rate ${{inputs.learning_rate}}
   --n_estimators ${{inputs.n_estimators}}
   --registered_model_name ${{inputs.registered_model_name}}
 inputs:
-  training_data: 
+  data: 
     type: uri_folder 
     path: azureml:realtor-data-clean@latest
   learning_rate: 0.1
