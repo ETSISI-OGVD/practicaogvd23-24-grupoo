@@ -8,7 +8,7 @@ command: >-
   --registered_model_name ${{inputs.registered_model_name}}
 inputs:
   data: 
-    type: uri_folder 
+    type: uri_file 
     path: azureml:realtor-data-clean@latest
   learning_rate: 0.1
   n_estimators: 100
