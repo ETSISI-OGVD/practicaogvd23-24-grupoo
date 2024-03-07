@@ -11,7 +11,7 @@ on:
       - 'model-deploy'
 
 jobs:
-  train:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
