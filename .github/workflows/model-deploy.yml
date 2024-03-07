@@ -23,4 +23,4 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Submit job
-      run: az ml job create -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final
+      run: az ml online-deployment update -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final
