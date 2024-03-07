@@ -4,7 +4,7 @@ endpoint_name: realtor-endpoint
 # model: azureml:realtor-model@latest
 model:
   name: realtor-model
-  path: realtor-model/model
+  # path: realtor-model/model
   type: mlflow_model
 environment: azureml://registries/azureml/environments/sklearn-1.1/versions/25
 instance_type: Standard_DS2_v2
