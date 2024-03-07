@@ -25,7 +25,7 @@ jobs:
     - name: Check deployment status
       id: check_deployment
       run: |
-        deployment_status=$(az ml online-deployment show -n realtor-deployment --endpoint-name realtor-endpoint --resource-group trabajo-final --workspace-name ogvd-trabajo-final --query 'properties.provisioningState' -o tsv)
+        deployment_status=$(az ml online-deployment show -n realtor-deployment --endpoint-name realtor-endpoint --resource-group trabajo-final --workspace-name ogvd-trabajo-final --query 'properties.provisioningState' -o tsv) || true
         if [[ $deployment_status == "Succeeded" ]]; then
           echo "::set-output name=deployment_exists::true"
         else
