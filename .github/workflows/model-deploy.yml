@@ -1,0 +1,42 @@
+name: Deploy model
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    types:
+      - "closed"
+    paths:
+      - 'model-deploy'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Check deployment status
+      id: check_deployment
+      run: |
+        deployment_status=$(az ml online-deployment show -n realtor-deployment --endpoint-name realtor-endpoint --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }} --query 'properties.provisioningState' -o tsv) || true
+        if [[ $deployment_status == "Succeeded" ]]; then
+          echo "::set-output name=deployment_exists::true"
+        else
+          echo "::set-output name=deployment_exists::false"
+        fi
+    - name: Create or update deployment
+      run: |
+        deployment_exists=${{ steps.check_deployment.outputs.deployment_exists }}
+        if [[ $deployment_exists == "true" ]]; then
+          az ml online-deployment update -f model-deploy/model-deploy-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }}
+        else
+          az ml online-endpoint create -f model-deploy/endpoint-create-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }}
+          az ml online-deployment create -f model-deploy/model-deploy-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }}
+        fi

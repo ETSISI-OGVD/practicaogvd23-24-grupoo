@@ -1,0 +1,21 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+code: .
+command: >-
+  python data_update.py
+  --input-data ${{inputs.input_data}}
+  --output-data ${{outputs.output_data}}
+inputs:
+  input_data:
+    mode: ro_mount
+    path: azureml:realtor-data-raw@latest
+    type: uri_file
+outputs:
+  output_data:
+    mode: rw_mount
+    path: azureml://datastores/workspaceblobstore/paths/quickstart-output/realtor-data-clean.csv
+    type: uri_file
+    name: realtor-data-clean
+environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+# compute: 
+experiment_name: data-update-job
+description: Data Update Job

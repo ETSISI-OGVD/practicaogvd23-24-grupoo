@@ -3,8 +3,8 @@ import argparse
 import pandas as pd
 import mlflow
 import mlflow.sklearn
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.metrics import classification_report
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 
 def main():
@@ -32,13 +32,13 @@ def main():
 
     print("input data:", args.data)
     
-    credit_df = pd.read_csv(args.data, header=1, index_col=0)
+    df = pd.read_csv(args.data).drop(columns=["prev_sold_date"])
 
-    mlflow.log_metric("num_samples", credit_df.shape[0])
-    mlflow.log_metric("num_features", credit_df.shape[1] - 1)
+    mlflow.log_metric("num_samples", df.shape[0])
+    mlflow.log_metric("num_features", df.shape[1] - 1)
 
     train_df, test_df = train_test_split(
-        credit_df,
+        df,
         test_size=args.test_train_ratio,
     )
     ####################
@@ -49,27 +49,28 @@ def main():
     #<train the model>
     ##################
     # Extracting the label column
-    y_train = train_df.pop("default payment next month")
+    y_train = train_df.pop("price")
 
     # convert the dataframe values to array
     X_train = train_df.values
+    print(X_train)
 
     # Extracting the label column
-    y_test = test_df.pop("default payment next month")
+    y_test = test_df.pop("price")
 
     # convert the dataframe values to array
     X_test = test_df.values
 
     print(f"Training with data of shape {X_train.shape}")
 
-    clf = GradientBoostingClassifier(
+    clf = GradientBoostingRegressor(
         n_estimators=args.n_estimators, learning_rate=args.learning_rate
     )
     clf.fit(X_train, y_train)
 
     y_pred = clf.predict(X_test)
 
-    print(classification_report(y_test, y_pred))
+    print(mean_absolute_error(y_test, y_pred))
     ###################
     #</train the model>
     ###################
@@ -95,7 +96,7 @@ def main():
     ###########################
     
     # Stop Logging
-    mlflow.end_run()
+    # mlflow.end_run()
 
 if __name__ == "__main__":
     main()

@@ -1,17 +1,19 @@
-name: Train model
+name: Update the dataset
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * MON"
   pull_request:
     branches:
       - main
     types:
       - "closed"
     paths:
-      - 'model-train'
+      - 'data-update'
 
 jobs:
-  train:
+  data_update:
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
@@ -23,4 +25,6 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Submit job
-      run: az ml job create -f model-train/model-train-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }}
+      run: az ml job create -f data-update/data-update-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }} --stream
+    # TODO also run train -s --stream
+
