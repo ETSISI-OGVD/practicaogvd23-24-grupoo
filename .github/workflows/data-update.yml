@@ -25,6 +25,6 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Submit job
-      run: az ml job create -f data-update/data-update-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final
+      run: az ml job create -f data-update/data-update-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }} --stream
     # TODO also run train -s --stream
 
