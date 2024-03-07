@@ -22,5 +22,20 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
-    - name: Submit job
-      run: az ml online-deployment update -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final
+    - name: Check deployment status
+      id: check_deployment
+      run: |
+        deployment_status=$(az ml online-deployment show -n realtor-deployment --resource-group my-resource-group --workspace-name my-workspace --query 'properties.provisioningState' -o tsv)
+        if [[ $deployment_status == "Succeeded" ]]; then
+          echo "::set-output name=deployment_exists::true"
+        else
+          echo "::set-output name=deployment_exists::false"
+        fi
+    - name: Create or update deployment
+      run: |
+        deployment_exists=${{ steps.check_deployment.outputs.deployment_exists }}
+        if [[ $deployment_exists == "true" ]]; then
+          az ml online-deployment update -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final --stream
+        else
+          az ml online-deployment create -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final --stream
+        fi
