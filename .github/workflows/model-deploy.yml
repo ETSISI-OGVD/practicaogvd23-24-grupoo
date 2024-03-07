@@ -35,7 +35,7 @@ jobs:
       run: |
         deployment_exists=${{ steps.check_deployment.outputs.deployment_exists }}
         if [[ $deployment_exists == "true" ]]; then
-          az ml online-deployment update -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final --stream
+          az ml online-deployment update -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final
         else
-          az ml online-deployment create -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final --stream
+          az ml online-deployment create -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final
         fi
