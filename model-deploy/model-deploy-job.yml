@@ -1,10 +1,11 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
 name: realtor-deployment
 endpoint_name: realtor-endpoint
-model: azureml:realtor-model@latest
+# model: azureml:realtor-model@latest
+model:
+  name: realtor-model
+  path: realtor-model/model
+  type: mlflow_model
 environment: azureml://registries/azureml/environments/sklearn-1.1/versions/25
-code_configuration:
-  code: .
-  scoring_script: score.py
 instance_type: Standard_DS2_v2
 instance_count: 1
