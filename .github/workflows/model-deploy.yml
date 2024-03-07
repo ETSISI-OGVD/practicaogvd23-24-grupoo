@@ -1,0 +1,26 @@
+name: Deploy model
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    types:
+      - "closed"
+    paths:
+      - 'model-deploy'
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Submit job
+      run: az ml job create -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final
