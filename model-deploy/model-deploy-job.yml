@@ -2,6 +2,6 @@ $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.sch
 name: realtor-deployment
 endpoint_name: realtor-endpoint
 model: azureml:realtor-model:1
-environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu:latest
 instance_type: Standard_DS1_v2
 instance_count: 1
