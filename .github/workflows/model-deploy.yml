@@ -37,5 +37,6 @@ jobs:
         if [[ $deployment_exists == "true" ]]; then
           az ml online-deployment update -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final
         else
+          az ml online-endpoint create -f model-deploy/endpoint-create-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final
           az ml online-deployment create -f model-deploy/model-deploy-job.yml --resource-group trabajo-final --workspace-name ogvd-trabajo-final
         fi
