@@ -20,12 +20,13 @@ def main():
     parser.add_argument("--instance-type", type=str, help="Instace Type", default="Standard_DS2_v2")
     parser.add_argument("--instance-count", type=int, help="Instace Type", default=1)
 
-    subscription_id = os.environ.get('AZURE_SUBSCRIPTION_ID')
-    print("Subscription ID:", subscription_id)
 
     args = parser.parse_args()
 
-    credential = ManagedIdentityCredential()
+    # credential = ManagedIdentityCredential()
+    client_id = os.environ.get('DEFAULT_IDENTITY_CLIENT_ID')
+    print(f"Client ID: {client_id}")
+    credential = ManagedIdentityCredential(client_id=client_id)
     ml_client = MLClient(
         credential=credential,
         subscription_id=args.subscription_id,
