@@ -9,7 +9,7 @@ command: >-
   --deployment-name ${{inputs.deployment_name}}
   --endpoint-name ${{inputs.endpoint_name}}
   --instance-type ${{inputs.instance_type}}
-  --instance-count ${{inputs.instance_count}}
+  --instance-count 1
 inputs:
   model: realtor-model
   subscription_id: 95598df3-7982-4621-a42d-21bde1335164
@@ -18,7 +18,6 @@ inputs:
   deployment_name: realtor-deployment
   endpoint_name: realtor-endpoint
   instance_type: Standard_DS2_v2
-  instance_count: 1
 environment: azureml://registries/azureml/environments/python-sdk-v2/versions/13
 experiment_name: model-deploy-job
 description: Training job via Github actions
