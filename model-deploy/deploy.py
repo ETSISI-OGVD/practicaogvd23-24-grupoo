@@ -25,7 +25,7 @@ def main():
 
     args = parser.parse_args()
 
-    credentials = os.environ.get("credentials")
+    credentials = os.environ.get("CREDENTIALS")
     if credentials is None:
         raise ValueError("Please set the credentials environment variable")
     credentials = json.loads(credentials)

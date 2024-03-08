@@ -37,8 +37,8 @@ jobs:
         --endpoint-name realtor-endpoint
         --instance-type Standard_DS2_v2
         --instance-count 1
-      with:
-        credentials: ${{secrets.AZURE_CREDENTIALS}}
+      env:
+        CREDENTIALS: ${{secrets.AZURE_CREDENTIALS}}
 
 
     # - name: Install az ml extension
