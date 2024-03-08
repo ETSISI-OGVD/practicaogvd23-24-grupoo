@@ -16,16 +16,17 @@ jobs:
     steps:
     - name: Check out repo
       uses: actions/checkout@main
-
-    - name: Set up Python
+    
+    - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: 3.8
 
-    - name: Install dependencies
+    - name: Install Python dependencies
       run: |
-        pip install azureml-sdk azureml-core
-      
+        python -m pip install --upgrade pip
+        pip install azureml-core azureml-sdk
+
     - name: Run deploy script
       run: |
         python model-deploy/deploy.py
