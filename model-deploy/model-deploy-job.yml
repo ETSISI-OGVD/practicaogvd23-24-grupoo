@@ -19,6 +19,6 @@ inputs:
   endpoint_name: realtor-endpoint
   instance_type: Standard_DS2_v2
   instance_count: 1
-environment: azureml://registries/azureml/environments/python-sdk-v2/versions/13
+environment: azureml:AzureML-minimal-ubuntu18.04-py37-cpu-inference@latest
 experiment_name: model-deploy-job
 description: Training job via Github actions
