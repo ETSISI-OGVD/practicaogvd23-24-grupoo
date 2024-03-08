@@ -23,7 +23,10 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Submit job
-      run: az ml job create -f model-deploy/model-deploy-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }}
+      uses: azure/cli@v1
+      with:
+        inlineScript: az ml job create -f model-deploy/model-deploy-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }}
+  
     # - name: Check deployment status
     #   id: check_deployment
     #   run: |
