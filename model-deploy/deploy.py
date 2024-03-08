@@ -1,5 +1,6 @@
 import argparse
 import os
+import json
 
 from azure.ai.ml import MLClient
 from azure.ai.ml.entities import (
@@ -24,8 +25,22 @@ def main():
 
     args = parser.parse_args()
 
+    credentials = os.environ.get("credentials")
+    if credentials is None:
+        raise ValueError("Please set the credentials environment variable")
+    credentials = json.loads(credentials)
+
+    tenant_id = credentials["tenantId"]
+    client_id = credentials["clientId"]
+    client_secret = credentials["clientSecret"]
+    
+    credential = DefaultAzureCredential(
+        tenant_id=tenant_id,
+        client_id=client_id,
+        client_secret=client_secret,
+    )
+
     # create a client
-    credential = DefaultAzureCredential(exclude_shared_token_cache_credential=True)
     ml_client = MLClient(credential, args.subscription_id, args.resource_group, args.workspace_name)
 
     latest_model_version = max(
