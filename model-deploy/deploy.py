@@ -25,6 +25,8 @@ def main():
 
     args = parser.parse_args()
 
+    print(args)
+
     credentials = os.environ.get("CREDENTIALS")
     if credentials is None:
         raise ValueError("Please set the credentials environment variable")
@@ -38,7 +40,13 @@ def main():
     credential = DefaultAzureCredential()
 
     # create a client
-    ml_client = MLClient(credential, args.subscription_id, args.resource_group, args.workspace_name)
+    ml_client = MLClient(
+        credential=credential,
+        subscription_id=args.subscription_id,
+        resource_group=args.resource_group,
+        workspace_name=args.workspace_name,
+    )
+
 
     latest_model_version = max(
         [int(m.version) for m in ml_client.models.list(name=args.model)]

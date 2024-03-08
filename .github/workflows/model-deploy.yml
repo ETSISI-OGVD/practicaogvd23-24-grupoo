@@ -30,14 +30,14 @@ jobs:
 
     - name: Run deploy script
       run: |
-        python model-deploy/deploy.py |
-        --model realtor-model |
-        --subscription-id 95598df3-7982-4621-a42d-21bde1335164 |
-        --resource-group trabajo-final |
-        --workspace-name ogvd-trabajo-final |
-        --deployment-name realtor-deployment |
-        --endpoint-name realtor-endpoint |
-        --instance-type Standard_DS2_v2 |
+        python model-deploy/deploy.py
+        --model realtor-model
+        --subscription-id 95598df3-7982-4621-a42d-21bde1335164
+        --resource-group trabajo-final
+        --workspace-name ogvd-trabajo-final
+        --deployment-name realtor-deployment
+        --endpoint-name realtor-endpoint
+        --instance-type Standard_DS2_v2
         --instance-count 1
       env:
         CREDENTIALS: ${{secrets.AZURE_CREDENTIALS}}
