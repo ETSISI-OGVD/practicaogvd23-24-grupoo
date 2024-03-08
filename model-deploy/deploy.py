@@ -6,7 +6,8 @@ from azure.ai.ml.entities import (
     ManagedOnlineEndpoint,
     ManagedOnlineDeployment,
 )
-from azure.identity import ServicePrincipalCredential
+# from azure.identity import ServicePrincipalCredential
+from azure.common.credentials import ServicePrincipalCredentials
 
 def main():
     # read params
@@ -24,7 +25,7 @@ def main():
     args = parser.parse_args()
 
     # credential = ManagedIdentityCredential()
-    credential = ServicePrincipalCredential()
+    credential = ServicePrincipalCredentials()
     ml_client = MLClient(
         credential=credential,
         subscription_id=args.subscription_id,
