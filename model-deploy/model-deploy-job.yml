@@ -20,4 +20,6 @@ inputs:
   instance_type: Standard_DS2_v2
 environment: azureml://registries/azureml/environments/python-sdk-v2/versions/13
 experiment_name: model-deploy-job
-description: Training job via Github actions
+description: Deploy job via Github actions
+identity:
+  type: managed_identity
