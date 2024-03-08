@@ -43,7 +43,7 @@ def main():
     ml_client = MLClient(
         credential=credential,
         subscription_id=args.subscription_id,
-        resource_group=args.resource_group,
+        resource_group_name=args.resource_group,
         workspace_name=args.workspace_name,
     )
 
