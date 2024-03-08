@@ -19,7 +19,6 @@ inputs:
   endpoint_name: realtor-endpoint
   instance_type: Standard_DS2_v2
   instance_count: 1
-environment: azureml:python-sdk-v2:13
-# compute: azureml:computer456
+environment: azureml://registries/azureml/environments/python-sdk-v2/versions/13
 experiment_name: model-deploy-job
 description: Training job via Github actions
