@@ -30,37 +30,6 @@ jobs:
 
     - name: Run deploy script
       run: |
-        python model-deploy/deploy.py --model realtor-model --subscription-id 95598df3-7982-4621-a42d-21bde1335164 --resource-group trabajo-final --workspace-name ogvd-trabajo-final --deployment-name realtor-deployment --endpoint-name realtor-endpoint --instance-type Standard_DS2_v2 --instance-count 1
+        python model-deploy/deploy.py --model realtor-model --subscription-id 95598df3-7982-4621-a42d-21bde1335164 --resource-group trabajo-final --workspace-name ogvd-trabajo-final --deployment-name realtor-deployment --endpoint-name realtor-endpoint --instance-type Standard_E4s_v3 --instance-count 1
       env:
         CREDENTIALS: ${{secrets.AZURE_CREDENTIALS}}
-
-
-    # - name: Install az ml extension
-    #   run: az extension add -n ml -y
-    # - name: Azure login
-    #   uses: azure/login@v1
-    #   with:
-    #     creds: ${{secrets.AZURE_CREDENTIALS}}
-
-    # - name: Submit job
-    #   run: |
-    #     az ml job create -f model-deploy/model-deploy-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }}
-
-    # - name: Check deployment status
-    #   id: check_deployment
-    #   run: |
-    #     deployment_status=$(az ml online-deployment show -n realtor-deployment --endpoint-name realtor-endpoint --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }} --query 'properties.provisioningState' -o tsv) || true
-    #     if [[ $deployment_status == "Succeeded" ]]; then
-    #       echo "::set-output name=deployment_exists::true"
-    #     else
-    #       echo "::set-output name=deployment_exists::false"
-    #     fi
-    # - name: Create or update deployment
-    #   run: |
-    #     deployment_exists=${{ steps.check_deployment.outputs.deployment_exists }}
-    #     if [[ $deployment_exists == "true" ]]; then
-    #       az ml online-deployment update -f model-deploy/model-deploy-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }}
-    #     else
-    #       az ml online-endpoint create -f model-deploy/endpoint-create-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }}
-    #       az ml online-deployment create -f model-deploy/model-deploy-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }}
-    #     fi

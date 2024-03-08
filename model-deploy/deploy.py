@@ -25,8 +25,6 @@ def main():
 
     args = parser.parse_args()
 
-    print(args)
-
     credentials = os.environ.get("CREDENTIALS")
     if credentials is None:
         raise ValueError("Please set the credentials environment variable")

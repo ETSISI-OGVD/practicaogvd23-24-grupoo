@@ -14,6 +14,5 @@ inputs:
   n_estimators: 100
   registered_model_name: realtor-model
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-# compute: azureml:computer456
 experiment_name: model-train-job
 description: Training job via Github actions
