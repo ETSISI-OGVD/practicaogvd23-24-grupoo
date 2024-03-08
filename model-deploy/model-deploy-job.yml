@@ -12,7 +12,7 @@ command: >-
   --instance-count {{ inputs.instance-count }
 inputs:
   model: realtor-model
-  subscription-id: 95598df3-7982-4621-a42d-21bde1335164
+  subscription-id: 95598df3_7982_4621_a42d_21bde1335164
   resource-group: trabajo-final
   workspace-name: ogvd-trabajo-final
   deployment-name: realtor-deployment
