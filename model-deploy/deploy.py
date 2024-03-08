@@ -25,7 +25,7 @@ def main():
     args = parser.parse_args()
 
     # create a client
-    credential = DefaultAzureCredential()
+    credential = DefaultAzureCredential(exclude_shared_token_cache_credential=True)
     ml_client = MLClient(credential, args.subscription_id, args.resource_group, args.workspace_name)
 
     latest_model_version = max(
