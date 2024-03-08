@@ -2,14 +2,14 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 code: .
 command: >-
   python deploy.py
-  --model {{ inputs.model }}
-  --subscription-id {{ inputs.subscription_id }}
-  --resource-group {{ inputs.resource_group }}
-  --workspace-name {{ inputs.workspace_name }}
-  --deployment-name {{ inputs.deployment_name }}
-  --endpoint-name {{ inputs.endpoint_name }}
-  --instance-type {{ inputs.instance_type }}
-  --instance-count {{ inputs.instance_count }
+  --model ${{inputs.model}}
+  --subscription-id ${{inputs.subscription_id}}
+  --resource-group ${{inputs.resource_group}}
+  --workspace-name ${{inputs.workspace_name}}
+  --deployment-name ${{inputs.deployment_name}}
+  --endpoint-name ${{inputs.endpoint_name}}
+  --instance-type ${{inputs.instance_type}}
+  --instance-count ${{inputs.instance_count}}
 inputs:
   model: realtor-model
   subscription_id: 95598df3-7982-4621-a42d-21bde1335164
