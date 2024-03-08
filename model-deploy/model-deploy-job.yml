@@ -3,22 +3,22 @@ code: .
 command: >-
   python deploy.py
   --model {{ inputs.model }}
-  --subscription-id {{ inputs.subscription-id }}
-  --resource-group {{ inputs.resource-group }}
-  --workspace-name {{ inputs.workspace-name }}
-  --deployment-name {{ inputs.deployment-name }}
-  --endpoint-name {{ inputs.endpoint-name }}
-  --instance-type {{ inputs.instance-type }}
-  --instance-count {{ inputs.instance-count }
+  --subscription-id {{ inputs.subscription_id }}
+  --resource-group {{ inputs.resource_group }}
+  --workspace-name {{ inputs.workspace_name }}
+  --deployment-name {{ inputs.deployment_name }}
+  --endpoint-name {{ inputs.endpoint_name }}
+  --instance-type {{ inputs.instance_type }}
+  --instance-count {{ inputs.instance_count }
 inputs:
   model: realtor-model
-  subscription-id: 95598df3_7982_4621_a42d_21bde1335164
-  resource-group: trabajo-final
-  workspace-name: ogvd-trabajo-final
-  deployment-name: realtor-deployment
-  endpoint-name: realtor-endpoint
-  instance-type: Standard_DS2_v2
-  instance-count: 1
+  subscription_id: 95598df3-7982-4621-a42d-21bde1335164
+  resource_group: trabajo-final
+  workspace_name: ogvd-trabajo-final
+  deployment_name: realtor-deployment
+  endpoint_name: realtor-endpoint
+  instance_type: Standard_DS2_v2
+  instance_count: 1
 environment: azureml:python-sdk-v2:13
 # compute: azureml:computer456
 experiment_name: model-deploy-job
