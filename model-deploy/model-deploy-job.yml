@@ -22,4 +22,4 @@ environment: azureml://registries/azureml/environments/python-sdk-v2/versions/13
 experiment_name: model-deploy-job
 description: Deploy job via Github actions
 identity:
-  type: user_identity
+  type: managed
