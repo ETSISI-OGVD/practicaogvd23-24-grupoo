@@ -30,15 +30,12 @@ def main():
         raise ValueError("Please set the credentials environment variable")
     credentials = json.loads(credentials)
 
-    tenant_id = credentials["tenantId"]
-    client_id = credentials["clientId"]
-    client_secret = credentials["clientSecret"]
+    # set env vars
+    os.environ["AZURE_CLIENT_ID"] = credentials["clientId"]
+    os.environ["AZURE_CLIENT_SECRET"] = credentials["clientSecret"]
+    os.environ["AZURE_TENANT_ID"] = credentials["tenantId"]
     
-    credential = DefaultAzureCredential(
-        tenant_id=tenant_id,
-        client_id=client_id,
-        client_secret=client_secret,
-    )
+    credential = DefaultAzureCredential()
 
     # create a client
     ml_client = MLClient(credential, args.subscription_id, args.resource_group, args.workspace_name)
