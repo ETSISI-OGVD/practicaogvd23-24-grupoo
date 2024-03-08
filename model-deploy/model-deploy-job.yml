@@ -1,11 +1,25 @@
-$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: realtor-deployment
-endpoint_name: realtor-endpoint
-model: azureml:realtor-model@latest
-# model:
-#   name: realtor-model
-#   path: realtor-model/model
-#   type: mlflow_model
-environment: azureml://registries/azureml/environments/sklearn-1.1/versions/25
-instance_type: Standard_DS2_v2
-instance_count: 1
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+code: .
+command: >-
+  python deploy.py
+  --model {{ inputs.model }}
+  --subscription-id {{ inputs.subscription-id }}
+  --resource-group {{ inputs.resource-group }}
+  --workspace-name {{ inputs.workspace-name }}
+  --deployment-name {{ inputs.deployment-name }}
+  --endpoint-name {{ inputs.endpoint-name }}
+  --instance-type {{ inputs.instance-type }}
+  --instance-count {{ inputs.instance-count }
+inputs:
+  model: realtor-model
+  subscription-id: 95598df3-7982-4621-a42d-21bde1335164
+  resource-group: trabajo-final
+  workspace-name: ogvd-trabajo-final
+  deployment-name: realtor-deployment
+  endpoint-name: realtor-endpoint
+  instance-type: Standard_DS2_v2
+  instance-count: 1
+environment: azureml:python-sdk-v2:13
+# compute: azureml:computer456
+experiment_name: model-deploy-job
+description: Training job via Github actions
