@@ -1,6 +1,11 @@
 name: Train model
 
 on:
+  workflow_run:
+    workflows:
+      - data-update
+    types:
+      - completed
   workflow_dispatch:
   pull_request:
     branches:
@@ -23,4 +28,4 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Submit job
-      run: az ml job create -f model-train/model-train-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }}
+      run: az ml job create -f model-train/model-train-job.yml --resource-group ${{ vars.RESOURCE_GROUP }} --workspace-name ${{ vars.WORKSPACE_NAME }} --stream

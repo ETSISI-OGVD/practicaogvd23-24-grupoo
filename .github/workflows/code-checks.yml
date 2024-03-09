@@ -7,8 +7,6 @@ on:
       - main
     types:
       - "opened"
-    paths:
-      - 'data-update'
 
 jobs:
   job1:
@@ -27,3 +25,5 @@ jobs:
     - name: Run linting tests
       run: | 
         flake8 model-train
+        flake8 data-update
+        flake8 model-deploy
