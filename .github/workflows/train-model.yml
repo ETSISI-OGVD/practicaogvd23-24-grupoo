@@ -1,12 +1,14 @@
-name: train-model
+name: train_model
 
 on:
   workflow_run:
     workflows:
-      - data-update
+      - "data_update"
     types:
       - completed
+
   workflow_dispatch:
+
   pull_request:
     branches:
       - main

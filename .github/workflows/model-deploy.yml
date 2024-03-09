@@ -1,9 +1,9 @@
-name: deploy-model
+name: deploy_model
 
 on:
   workflow_run:
     workflows:
-      - train-model
+      - "train_model"
     types:
       - completed
   workflow_dispatch:
