@@ -71,7 +71,6 @@ def main():
         name=args.deployment_name,
         endpoint_name=args.endpoint_name,
         model=model,
-        environment="azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest",
         instance_type=args.instance_type,
         instance_count=args.instance_count,
     )
