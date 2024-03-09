@@ -57,6 +57,10 @@ def main():
         name=args.endpoint_name,
         description="Online endpoint",
         auth_mode="key",
+        tags={
+            "training_dataset": "realtor-data",
+            "model_type": "sklearn.GradientBoostingClassifier",
+        }
     )
 
     endpoint = ml_client.online_endpoints.begin_create_or_update(endpoint).result()
