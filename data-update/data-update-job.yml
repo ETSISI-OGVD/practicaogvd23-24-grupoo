@@ -16,6 +16,5 @@ outputs:
     type: uri_file
     name: realtor-data-clean
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-# compute: 
 experiment_name: data-update-job
 description: Data Update Job

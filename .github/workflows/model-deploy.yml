@@ -1,4 +1,4 @@
-name: Deploy model
+name: deploy-model
 
 on:
   workflow_run:
