@@ -1,22 +1,25 @@
-# OGVD-Trabajo
+# OGVD - Assignment 2
 
+## Synapse assignment
 
+We have prepared an EDA notebook using Spark, run on a CSV file stored in Azure.
 
-## Cloud resources
+## ML assignment
 
-### Resource group
-Resource group where all others resources belong is called ```trabajo-final```. It contains a Storage account, Synapse workspace and Azure Machine Learning workspace.
+### Pipeline explanation
 
-#### Storage account
-Storage account contains a datalake named ```datalaketrabajo``` with a file system named ```fstrabajo``` where data is loaded and stored.
+We have created an automatic MLOps pipeline that runs from changes in this Github repository. It has three steps:
 
-#### Synapse workspace
-Synapse workspace is called ```trabajo-final``` and created as shown in this image:
-![alt text](https://github.com/ETSISI-OGVD/practicaogvd23-24-grupoo/blob/main/imgs/synapse.png?raw=true)
+* `data-update`. The dataset is automatically updated and cleaned. In our case, we have a static dataset, so we only clean the raw data and prepare it for training. In a real world setting it should grab new data that has been accumulating, so the model is trained on recent data and we prevent any drift.
+* `model-train`. Training of a Gradient Boosting Regressor on the clean data.
+* `model-deploy`. An endpoint is created or updated and the model is deployed. Although we have prepared two YAML files for these two jobs, we had trouble with a known bug for MLFLOW models. Thus, we ended up running everything from the `deploy.py` script form Github runners.
 
-#### Azure Machine Learning workspace
-ML workspace is named ```ogvd-trabajo-final```.
+Each step has a directory, and also a Github workflow to run them. Each step is run automatically after the previous one is finished, or after its directory has been updated in the repository from a Pull Request. Further, the `data-update` action (and consequently the full pipeline) is run each Monday at night, so the model would be up to date with the current data distribution.
 
-#### All resource outline
-Resources hierarchy are shown in the next picture:
-![alt text](https://github.com/ETSISI-OGVD/practicaogvd23-24-grupoo/blob/main/imgs/overall.png?raw=true)
+### Reproduction details
+
+- Create an Azure service principal objetc and inject the credentials as a secret.
+- Create the raw dataset in Azure.
+- Run the worflows from Github.
+
+## Cost report
