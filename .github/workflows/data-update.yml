@@ -2,8 +2,8 @@ name: data_update
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * MON"
+  # schedule:
+  #   - cron: "0 0 * * MON"
   pull_request:
     branches:
       - main

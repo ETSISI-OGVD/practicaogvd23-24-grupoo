@@ -79,7 +79,7 @@ def main():
 
     # route traffic to the new deployment
     endpoint.properties["active_deployment_name"] = args.deployment_name
-    endpoint = ml_client.online_endpoints.begin_update(endpoint).result()
+    endpoint = ml_client.online_endpoints.begin_create_or_update(endpoint).result()
 
 
 if __name__ == "__main__":
