@@ -23,7 +23,7 @@ All these GitHub actions are executed when the previous step has finished execut
 
 ### Part 1: Synapse for data analysis
 
-A tutorial to create the data storage resource and the Synapse workspace can be found in [this link](https://github.com/MicrosoftLearning/DP-900T00A-Azure-Data-Fundamentals/blob/master/Instructions/Labs/dp900-04-synapse-lab.md). In that tutorial they also show how to ingest data from a CSV file, which is also our case. Our dataset can be found in [this link](https://www.kaggle.com/datasets/ahmedshahriarsakib/usa-real-estate-dataset).
+A tutorial to create the data storage resource and the Synapse workspace can be found in [this link](https://github.com/MicrosoftLearning/DP-900T00A-Azure-Data-Fundamentals/blob/master/Instructions/Labs/dp900-04-synapse-lab.md). In that tutorial they also show how to ingest data from a CSV file, which is also our case ([link to our dataset](https://www.kaggle.com/datasets/ahmedshahriarsakib/usa-real-estate-dataset)).
 
 After this, one can download the notebook `notebooks/eda.ipynb` and upload it to the Synapse workspace, and run it adjusting the path to the dataset in their workspace.
 
@@ -31,18 +31,31 @@ After this, one can download the notebook `notebooks/eda.ipynb` and upload it to
 
 #### Step 2.1. Create a Machine Learning workspace
 
-The first section in [this link](https://learn.microsoft.com/es-es/azure/machine-learning/quickstart-create-resources?view=azureml-api-2) describes how to create the workspace.
+The first section in [this link](https://learn.microsoft.com/es-es/azure/machine-learning/quickstart-create-resources?view=azureml-api-2) describes how to create an AzureML workspace.
 
 #### Step 2.2. Create the raw dataset
+
+1. Go to the data tab in your AzureML workspace and click on the **Create** button.
+    ![Data](imgs/tutorial_ml_data_data.png)
+2. Select type *uri_file*.
+    ![Data type](imgs/tutorial_ml_data_data_type.png)
+3. Upload the CSV data file.
 
 #### Step 2.3. Link your Azure subscription and ML Workspace to GitHub
 - Create service principal
 - Create secret in GitHub
 - Create variables in GitHub
 
+<!-- TODO -->
+
 #### Step 2.4. Run the pipeline through GitHub actions
+Manual run the **data-update** GitHub Action to start the full pipeline. You can uncomment the cron schedule in the `.github/workflows/data-update.yml` file to make it recurrent, and you can adjust the schedule. After each step is finished, the next one should start.
 
 #### Step 2.5. Run the model through the endpoint
+After the deployment is finished, go to the **Endpoint** tab in the left sidebar. Select the created endpoint and go to the consume tab as in the following picture.
+![Endpoint consume](imgs/tutorial_endpoint_consume.png)
+
+Using the key as Bearer token, you can access the endpoint. Underneath you will find code examples, or you can run it in Postman.
 
 ## 🎥 Demos
 
