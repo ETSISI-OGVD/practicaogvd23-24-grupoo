@@ -78,7 +78,7 @@ def main():
     deployment = ml_client.begin_create_or_update(deployment).result()
 
     # route traffic to the new deployment
-    endpoint.properties["active_deployment_name"] = args.deployment_name
+    endpoint.traffic = {args.deployment_name: 100}
     endpoint = ml_client.online_endpoints.begin_create_or_update(endpoint).result()
 
 
