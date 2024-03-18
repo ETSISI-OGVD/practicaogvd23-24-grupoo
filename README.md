@@ -42,7 +42,7 @@ The first section in [this link](https://learn.microsoft.com/es-es/azure/machine
 3. Upload the CSV data file.
 
 #### Step 2.3. Link your Azure subscription and ML Workspace to GitHub
-1. **Create service principal**: This is explained in ["Set up authentication for Azure Machine Learning resources and workflows"](https://github.com/MicrosoftLearning/DP-900T00A-Azure-Data-Fundamentals/blob/master/Instructions/Labs/dp900-04-synapse-lab.md). This tutorial explain how to generate a JSON certificate that allows you to authenticate from GitHub. Using Azure CLI, and after loging in, you must run: ```az ad sp create-for-rbac --json-auth --name ml-auth --role Contributor --scopes /subscriptions/<subscription id>```. This command generates the JSON file:
+1. **Create service principal**: This is explained in ["Set up authentication for Azure Machine Learning resources and workflows"](https://github.com/MicrosoftLearning/DP-900T00A-Azure-Data-Fundamentals/blob/master/Instructions/Labs/dp900-04-synapse-lab.md). This tutorial explains how to generate a JSON certificate that allows you to authenticate from GitHub. Using Azure CLI, and after loging in, you must run: ```az ad sp create-for-rbac --json-auth --name ml-auth --role Contributor --scopes /subscriptions/<subscription id>```. This command generates the JSON file:
     ```json
     {
         "clientId": "your-client-id",
@@ -57,7 +57,7 @@ The first section in [this link](https://learn.microsoft.com/es-es/azure/machine
         "managementEndpointUrl": "https://management.core.windows.net"
     }
     ```   
-2. **Create secret in GitHub**: You must create a secret named ```ÀZURE_CREDENTIALS``` containing JSON. You can add a secret from *Settings* > *Secrets and variables* > *Actions* > *New repository secret*.
+2. **Create secret in GitHub**: You must create a secret named ```AZURE_CREDENTIALS``` containing JSON. You can add a secret from *Settings* > *Secrets and variables* > *Actions* > *New repository secret*.
 3. **Create variables in GitHub**: Additionally, you must create the variables ```RESOURCE_GROUP``` and ```WORKSPACE_NAME``` to choose in which environment the tasks will be executed. This can be done by choosing *Variables* in the same place as above.
 
 #### Step 2.4. Run the pipeline through GitHub actions
